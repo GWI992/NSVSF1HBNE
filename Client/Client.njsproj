@@ -40,6 +40,9 @@
     <Folder Include="src\components\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include=".gitignore">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="babel.config.js" />
     <Content Include="package.json" />
     <Content Include="public\favicon.ico" />
