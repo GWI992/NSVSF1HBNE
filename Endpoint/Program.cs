@@ -21,15 +21,33 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 // DI for Logics
 builder.Services.AddScoped<ILogic<Table, Table>, TableLogic>();
+builder.Services.AddScoped<ILogic<Reservation, Reservation>, ReservationLogic>();
 
 // DI for Repositories
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // DI for Validators
 builder.Services.AddScoped<IValidator<Table>, TableValidator>();
+builder.Services.AddScoped<IValidator<Reservation>, ReservationValidator>();
 
+builder.Services.AddSwaggerGen();
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "WorkManagement API V1");
+        c.RoutePrefix = string.Empty;
+    });
+}
+else
+{
+    app.UseDefaultFiles();
+}
 
 app.MapControllers();
 
