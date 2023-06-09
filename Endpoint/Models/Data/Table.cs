@@ -1,6 +1,8 @@
 ﻿using Endpoint.Models.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 
 namespace Endpoint.Models.Data
 {
@@ -20,6 +22,9 @@ namespace Endpoint.Models.Data
         [Required]
         [Column("capacity")]
         public int Capacity { get; set; }
+
+        [JsonIgnore]
+        public virtual ICollection<Reservation>? Reservations { get; set; }
 
         public Table()
         {
