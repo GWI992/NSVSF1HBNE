@@ -9,6 +9,7 @@ using Endpoint.Repositories.GenericRepository;
 using Endpoint.Repositories.Interfaces;
 using Endpoint.Repositories.ModelRepositories;
 using Endpoint.Validators;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,28 @@ builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString));
+
+// Identity
+builder.Services.AddAuthentication();
+builder.Services.AddIdentity<ApiUser, IdentityRole>(options =>
+{
+    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedEmail = false;
+    options.User.RequireUniqueEmail = false;
+    options.Password.RequireNonAlphanumeric = false;
+})
+    .AddEntityFrameworkStores<DataContext>()
+    .AddDefaultTokenProviders();
+
+// Cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder =>
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+    );
+});
 
 // DI for Logics
 builder.Services.AddScoped<ILogic<Table, Table>, TableLogic>();
@@ -48,7 +71,7 @@ else
 {
     app.UseDefaultFiles();
 }
-
+app.UseAuthentication();
 app.MapControllers();
 
 app.Run();
