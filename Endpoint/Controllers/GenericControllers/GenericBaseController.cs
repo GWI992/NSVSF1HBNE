@@ -22,13 +22,13 @@ namespace Endpoint.Controllers.GenericControllers
         public GenericBaseController(ILogic<TReq, TRes> logic) : this(logic, null) { }
 
         [HttpGet]
-        public IEnumerable<TRes> ReadAll()
+        public virtual IEnumerable<TRes> ReadAll()
         {
             return _logic.ReadAll();
         }
 
         [HttpGet("{id}")]
-        public ActionResult<TRes> Read(string id)
+        public virtual ActionResult<TRes> Read(string id)
         {
             try
             {
@@ -42,7 +42,7 @@ namespace Endpoint.Controllers.GenericControllers
         }
 
         [HttpPost]
-        public IResult Create([FromBody] TReq value)
+        public virtual IResult Create([FromBody] TReq value)
         {
             if (_validator != null && !_validator.Validate(value).IsValid)
             {
@@ -57,7 +57,7 @@ namespace Endpoint.Controllers.GenericControllers
         }
 
         [HttpPut("{id}")]
-        public IResult Put(string id, [FromBody] TReq value)
+        public virtual IResult Put(string id, [FromBody] TReq value)
         {
             if (_validator != null && !_validator.Validate(value).IsValid)
             {
@@ -80,7 +80,7 @@ namespace Endpoint.Controllers.GenericControllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(string id)
+        public virtual void Delete(string id)
         {
             _logic.Delete(id);
         }
