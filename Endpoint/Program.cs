@@ -1,5 +1,10 @@
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using System.Text;
 
 using Endpoint.Logic.Classes;
 using Endpoint.Logic.Interfaces;
@@ -8,8 +13,9 @@ using Endpoint.Repositories.Databases;
 using Endpoint.Repositories.GenericRepository;
 using Endpoint.Repositories.Interfaces;
 using Endpoint.Repositories.ModelRepositories;
+using Endpoint.Services.Interfaces;
+using Endpoint.Services.Classes;
 using Endpoint.Validators;
-using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,11 +32,31 @@ builder.Services.AddIdentity<ApiUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.SignIn.RequireConfirmedEmail = false;
-    options.User.RequireUniqueEmail = false;
+    options.User.RequireUniqueEmail = true;
     options.Password.RequireNonAlphanumeric = false;
 })
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
+
+// JWT
+var issuer = builder.Configuration.GetSection("JwtConfig:Issuer").Value;
+var key = builder.Configuration.GetSection("JwtConfig:Secret").Value;
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options => {
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidIssuer = issuer,
+        ValidateAudience = false,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+        ValidateLifetime = true,
+    };
+});
 
 // Cors
 builder.Services.AddCors(options =>
@@ -55,7 +81,24 @@ builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IValidator<Table>, TableValidator>();
 builder.Services.AddScoped<IValidator<Reservation>, ReservationValidator>();
 
-builder.Services.AddSwaggerGen();
+// DI for Validators
+builder.Services.AddScoped<IAuthManager, AuthManager>();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization
+            Enter 'Bearer' [space] TOKEN
+            Example: 'Bearer 123abc'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "TableReservation", Version = "v1" });
+});
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -71,7 +114,10 @@ else
 {
     app.UseDefaultFiles();
 }
+
 app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
