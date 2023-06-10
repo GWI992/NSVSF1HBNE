@@ -1,5 +1,6 @@
 ﻿using Endpoint.Models.Data;
 using Endpoint.Models.Requests;
+using Endpoint.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,12 +11,12 @@ namespace Endpoint.Controllers
     public class AccountController : ControllerBase
     {
         private readonly UserManager<ApiUser> _userManager;
-        private readonly SignInManager<ApiUser> _signInManager;
+        private readonly IAuthManager _authManager;
 
-        public AccountController(UserManager<ApiUser> userManager, SignInManager<ApiUser> signInManager)
+        public AccountController(UserManager<ApiUser> userManager, IAuthManager authManager)
         {
             this._userManager = userManager;
-            this._signInManager = signInManager;
+            this._authManager = authManager;
         }
 
         [HttpPost]
@@ -36,7 +37,7 @@ namespace Endpoint.Controllers
                 var result = await _userManager.CreateAsync(user, userDTO.Password);
                 if(!result.Succeeded)
                 {
-                    return BadRequest("$User Registration Attempt Failed:" + result.Errors.First().Description);
+                    return BadRequest("$User Registration Attempt Failed: " + result.Errors.First().Description);
                 }
 
                 await _userManager.AddToRoleAsync(user, "MANAGER");
@@ -50,7 +51,7 @@ namespace Endpoint.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDTO userDTO)
+        public async Task<IActionResult> Login([FromBody] LoginDTO loginDTO)
         {
             if (!ModelState.IsValid)
             {
@@ -59,13 +60,12 @@ namespace Endpoint.Controllers
 
             try
             {
-                var result = await _signInManager.PasswordSignInAsync(userDTO.Email, userDTO.Password, false, false);
-                if(!result.Succeeded)
+                if(!await _authManager.ValidateUser(loginDTO))
                 {
-                    return Unauthorized(result.ToString());
+                    return Unauthorized();
                 }
 
-                return Accepted();
+                return Accepted(new { Token = await _authManager.CreateToken() });
             }
             catch (Exception ex)
             {
