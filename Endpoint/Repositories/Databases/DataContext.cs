@@ -2,9 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using Endpoint.Models.Data;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Reflection.Emit;
+using Endpoint.Configurations.Entities;
 
 namespace Endpoint.Repositories.Databases
 {
@@ -17,6 +15,11 @@ namespace Endpoint.Repositories.Databases
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new ApiUserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleSetConfiguration());
+            modelBuilder.ApplyConfiguration(new TableConfiguration());
+
             modelBuilder.Entity<Table>()
                 .HasMany(c => c.Reservations)
                 .WithOne(d => d.Table)
