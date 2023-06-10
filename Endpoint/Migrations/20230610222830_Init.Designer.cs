@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Endpoint.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230610211031_Init")]
+    [Migration("20230610222830_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -94,15 +94,15 @@ namespace Endpoint.Migrations
                         {
                             Id = "9b100ee4-69ab-42b9-ae2f-31e1b33c462d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "56791e81-443c-4425-8cdb-05868970f1ca",
+                            ConcurrencyStamp = "e0884405-0fa3-41b3-9ab9-3130e2f228ba",
                             Email = "admin@admin.hu",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.HU",
                             NormalizedUserName = "ADMIN@ADMIN.HU",
-                            PasswordHash = "AQAAAAEAACcQAAAAEABsIT7Tv7nRHwFDS/+QLVLALOyEJCuUHZeE4I4NKV8b60dWB26sjZ7GvEPBe/QSzw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDA6kyULvGA5XAzrvqv6KTAdhtZDgpYuN0Au1hF2T1ktauZQ8zxgyBh5Ns0AF/WbIw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "19944edc-3064-4772-89d5-ae1f882b02f4",
+                            SecurityStamp = "8b2757ea-a94a-4b78-ba64-f948e890438f",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.hu"
                         });
@@ -171,37 +171,37 @@ namespace Endpoint.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "bd4cab22-4735-4d82-a33c-d03c2c7d7b68",
+                            Id = "885ee870-c8c6-47b4-b6f7-c89836b15640",
                             Capacity = 2,
                             Name = "#1 Table"
                         },
                         new
                         {
-                            Id = "f93cf653-34d9-4dca-9386-f2e76aba92d0",
+                            Id = "07eaf0ea-d516-47b4-a61a-8612f54a7e0b",
                             Capacity = 2,
                             Name = "#2 Table"
                         },
                         new
                         {
-                            Id = "7f109fc8-7df5-4bbd-9d65-87831a048c38",
+                            Id = "8982a0a4-0b6a-49f9-b734-afd5e4c97e7c",
                             Capacity = 2,
                             Name = "#3 Table"
                         },
                         new
                         {
-                            Id = "f566b2b7-dbd8-4f83-8ada-fa4d5379a994",
+                            Id = "077be945-e6cc-4f68-8011-0d213a10cebd",
                             Capacity = 4,
                             Name = "#4 Table"
                         },
                         new
                         {
-                            Id = "d6d42e8e-175d-465c-b517-6de316961fc8",
+                            Id = "3fa9d4a3-31a2-414f-a7c6-bfaceb0d63a5",
                             Capacity = 4,
                             Name = "#5 Table"
                         },
                         new
                         {
-                            Id = "ab05bff5-5737-422e-b671-e929fbed1eb9",
+                            Id = "4568cd2f-4edc-4049-ac54-593977fcd714",
                             Capacity = 4,
                             Name = "#6 Table"
                         });
@@ -237,14 +237,14 @@ namespace Endpoint.Migrations
                         new
                         {
                             Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
-                            ConcurrencyStamp = "09ccce75-5ae4-456c-8727-6f438cf568fd",
+                            ConcurrencyStamp = "ec8fcb41-79e5-407b-90d6-bd7cdbaa8d84",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
-                            ConcurrencyStamp = "5badd1d3-dac7-4b59-9b95-780f0ba69ed1",
+                            ConcurrencyStamp = "09a0b0fe-e2d6-461f-91f8-f36550f44774",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

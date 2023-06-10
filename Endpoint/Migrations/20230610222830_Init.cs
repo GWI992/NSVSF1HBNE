@@ -199,26 +199,26 @@ namespace Endpoint.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "09ccce75-5ae4-456c-8727-6f438cf568fd", "Manager", "MANAGER" },
-                    { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", "5badd1d3-dac7-4b59-9b95-780f0ba69ed1", "Administrator", "ADMINISTRATOR" }
+                    { "2301D884-221A-4E7D-B509-0113DCC043E1", "ec8fcb41-79e5-407b-90d6-bd7cdbaa8d84", "Manager", "MANAGER" },
+                    { "B22698B8-42A2-4115-9631-1C2D1E2AC5F7", "09a0b0fe-e2d6-461f-91f8-f36550f44774", "Administrator", "ADMINISTRATOR" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "9b100ee4-69ab-42b9-ae2f-31e1b33c462d", 0, "56791e81-443c-4425-8cdb-05868970f1ca", "admin@admin.hu", false, false, null, "ADMIN@ADMIN.HU", "ADMIN@ADMIN.HU", "AQAAAAEAACcQAAAAEABsIT7Tv7nRHwFDS/+QLVLALOyEJCuUHZeE4I4NKV8b60dWB26sjZ7GvEPBe/QSzw==", null, false, "19944edc-3064-4772-89d5-ae1f882b02f4", false, "admin@admin.hu" });
+                values: new object[] { "9b100ee4-69ab-42b9-ae2f-31e1b33c462d", 0, "e0884405-0fa3-41b3-9ab9-3130e2f228ba", "admin@admin.hu", false, false, null, "ADMIN@ADMIN.HU", "ADMIN@ADMIN.HU", "AQAAAAEAACcQAAAAEDA6kyULvGA5XAzrvqv6KTAdhtZDgpYuN0Au1hF2T1ktauZQ8zxgyBh5Ns0AF/WbIw==", null, false, "8b2757ea-a94a-4b78-ba64-f948e890438f", false, "admin@admin.hu" });
 
             migrationBuilder.InsertData(
                 table: "tables",
                 columns: new[] { "id", "capacity", "name" },
                 values: new object[,]
                 {
-                    { "7f109fc8-7df5-4bbd-9d65-87831a048c38", 2, "#3 Table" },
-                    { "ab05bff5-5737-422e-b671-e929fbed1eb9", 4, "#6 Table" },
-                    { "bd4cab22-4735-4d82-a33c-d03c2c7d7b68", 2, "#1 Table" },
-                    { "d6d42e8e-175d-465c-b517-6de316961fc8", 4, "#5 Table" },
-                    { "f566b2b7-dbd8-4f83-8ada-fa4d5379a994", 4, "#4 Table" },
-                    { "f93cf653-34d9-4dca-9386-f2e76aba92d0", 2, "#2 Table" }
+                    { "077be945-e6cc-4f68-8011-0d213a10cebd", 4, "#4 Table" },
+                    { "07eaf0ea-d516-47b4-a61a-8612f54a7e0b", 2, "#2 Table" },
+                    { "3fa9d4a3-31a2-414f-a7c6-bfaceb0d63a5", 4, "#5 Table" },
+                    { "4568cd2f-4edc-4049-ac54-593977fcd714", 4, "#6 Table" },
+                    { "885ee870-c8c6-47b4-b6f7-c89836b15640", 2, "#1 Table" },
+                    { "8982a0a4-0b6a-49f9-b734-afd5e4c97e7c", 2, "#3 Table" }
                 });
 
             migrationBuilder.InsertData(
