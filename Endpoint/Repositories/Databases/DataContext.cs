@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using Endpoint.Models.Data;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Reflection.Emit;
 
 namespace Endpoint.Repositories.Databases
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<ApiUser>
     {
         public DbSet<Table> Tables { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
