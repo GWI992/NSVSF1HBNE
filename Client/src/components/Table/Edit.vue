@@ -1,26 +1,29 @@
 <template>
     <section class="page-section" id="table-edit">
         <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Edit table: {{ table.name }}</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <router-link to="/table"><i class="my-0 fa fa-arrow-up"></i> Back</router-link>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
                     <form id="contactForm">
-                        <div id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
-                        
-                        <div class="form-floating mb-3">
-                            <input class="form-control" readonly v-bind:value="id"/>
-                        </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="table-name" type="text" placeholder="Enter name..." />
+                            <input class="form-control" id="table-name" type="text" placeholder="Enter name..." v-model="table.name" />
                             <label for="table-name">Name</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="table-capacity" type="number" placeholder="4" min="1" max="4" />
+                            <input class="form-control" id="table-capacity" type="number" placeholder="4" min="1" max="4" v-model="table.capacity" />
                             <label for="table-capacity">Capacity</label>
                         </div>
 
-                        <button class="btn btn-primary btn-xl float-end" id="submitButton" type="button">Save</button>
+                        <button class="btn btn-primary btn-xl float-end" id="submitButton" type="button" v-on:click="save">Save</button>
                     </form>
                 </div>
             </div>
@@ -29,17 +32,70 @@
 </template>
 
 <script>
-export default {
+    import { mapActions } from "vuex"
+    import { useToast } from "vue-toastification";
+    export default {
         name: 'Table edit',
+        setup() {
+            const toast = useToast();
+            return { toast }
+        },
         data() {
             return {
-                id: null,
+                table: {
+                    id: null,
+                    name: null,
+                    capacity: null,
+                },
             }
         },
         created() {
-            this.id = this.$route.params.id;
+            this.load(this.$route.params.id);
         },
-}
+        methods: {
+            ...mapActions(["TableUpdate", "TableGet"]),
+            async load(tableId) {
+                this.table = await this.TableGet(tableId);
+                if (!this.table.id) {
+                    this.triggerToast("Table not found", "error");
+                    this.$router.push('/table');
+                }
+            },
+            async save() {
+                if (!this.table.name) {
+                    this.triggerToast("Name is required", "error");
+                    return;
+                }
+
+                if (!this.table.capacity) {
+                    this.triggerToast("Capacity is required", "error");
+                    return;
+                }
+                if (await this.TableUpdate(this.table)) {
+                    this.triggerToast("Save successful", "success", "fas fa-check");
+                    this.$router.push('/table');
+                }
+                console.log(this.tables);
+            },
+            triggerToast(message, type = "error", icon = "fas fa-times") {
+                this.toast(message, {
+                    position: "top-right",
+                    timeout: 5000,
+                    closeOnClick: true,
+                    pauseOnFocusLoss: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    draggablePercent: 0.6,
+                    showCloseButtonOnHover: false,
+                    hideProgressBar: true,
+                    closeButton: "button",
+                    icon: icon,
+                    rtl: false,
+                    type: type
+                });
+            }
+        },
+    }
 </script>
 
 <style scoped>

@@ -7,7 +7,18 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.get("/api/table")
                 .then(response => {
-                    console.log(response);
+                    resolve(response.data);
+                })
+                .catch(err => {
+                    console.warn(err);
+                    reject(err);
+                });
+        });
+    },
+    async TableGet({ commit }, tableId) {
+        return new Promise((resolve, reject) => {
+            axios.get("/api/table/" + tableId)
+                .then(response => {
                     resolve(response.data);
                 })
                 .catch(err => {
