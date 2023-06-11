@@ -61,11 +61,14 @@ builder.Services.AddAuthentication(options =>
 // Cors
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
-        builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-    );
+    options.AddPolicy(name: "AllowAll",
+        policy =>
+        {
+            policy
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .WithOrigins("http://localhost:8081");
+        });
 });
 
 // DI for Logics
@@ -114,6 +117,8 @@ else
 {
     app.UseDefaultFiles();
 }
+
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
