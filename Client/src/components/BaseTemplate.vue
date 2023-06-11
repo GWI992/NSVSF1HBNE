@@ -7,7 +7,7 @@
                 <!-- Masthead Avatar Image-->
                 <img class="masthead-avatar mb-5" src="img/avataaars.svg" alt="..." />
                 <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
+                <h1 class="masthead-heading text-uppercase mb-0">Peter Peto</h1>
                 <!-- Icon Divider-->
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
@@ -15,11 +15,11 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+                <p class="masthead-subheading font-weight-light mb-0">GWI992</p>
             </div>
         </header>
         <!-- Portfolio Section-->
-        <section class="page-section portfolio" id="portfolio">
+        <section class="page-section portfolio" id="portfolio" v-if="showBase">
             <div class="container">
                 <!-- Portfolio Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
@@ -89,7 +89,7 @@
             </div>
         </section>
         <!-- About Section-->
-        <section class="page-section bg-primary text-white mb-0" id="about">
+        <section class="page-section bg-primary text-white mb-0" id="about" v-if="showBase">
             <div class="container">
                 <!-- About Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
@@ -114,7 +114,7 @@
             </div>
         </section>
         <!-- Contact Section-->
-        <section class="page-section" id="contact">
+        <section class="page-section" id="contact" v-if="showBase">
             <div class="container">
                 <!-- Contact Section Heading-->
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Contact Me</h2>
@@ -190,20 +190,10 @@
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
+                        <h4 class="text-uppercase mb-0">Server side development</h4>
                         <p class="lead mb-0">
-                            2215 John Daniel Drive
-                            <br />
-                            Clark, MO 65243
+                            NSVSF1HBNE<br />2022/23/2
                         </p>
-                    </div>
-                    <!-- Footer Social Icons-->
-                    <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
@@ -418,11 +408,16 @@
 </template>
 
 <script>
-export default {
-  name: 'BaseTemplate',
-  props: {
-  }
-}
+    export default {
+        name: 'BaseTemplate',
+        data() {
+            return {
+                showBase: false,
+            }
+        },
+        props: {
+        }
+    }
 </script>
 
 <style scoped>

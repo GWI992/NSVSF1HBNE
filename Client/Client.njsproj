@@ -44,8 +44,14 @@
     <Folder Include="src\components\" />
     <Folder Include="src\components\Reservation\" />
     <Folder Include="src\components\Table\" />
+    <Folder Include="src\store\" />
+    <Folder Include="src\store\modules\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="example.env" />
+    <Content Include=".env">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include=".gitignore">
       <SubType>Code</SubType>
     </Content>
@@ -77,6 +83,11 @@
     <Content Include="src\components\Table\Create.vue" />
     <Content Include="src\main.js" />
     <Content Include="src\router.js" />
+    <Content Include="src\store\index.js" />
+    <Content Include="src\store\modules\auth.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="vue.config.js" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

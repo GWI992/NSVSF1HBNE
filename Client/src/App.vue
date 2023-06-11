@@ -1,6 +1,7 @@
 <template>
     <Navigation />
     <router-view />
+    <vue-notification-list></vue-notification-list>
 </template>
 
 <script>
