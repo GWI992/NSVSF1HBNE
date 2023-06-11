@@ -37,7 +37,13 @@
     <Folder Include="public\" />
     <Folder Include="src\" />
     <Folder Include="src\assets\" />
+    <Folder Include="src\assets\css\" />
+    <Folder Include="public\img\" />
+    <Folder Include="public\img\portfolio\" />
+    <Folder Include="src\assets\js\" />
     <Folder Include="src\components\" />
+    <Folder Include="src\components\Reservation\" />
+    <Folder Include="src\components\Table\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".gitignore">
@@ -49,9 +55,28 @@
     <Content Include="public\index.html" />
     <Content Include="README.md" />
     <Content Include="src\App.vue" />
+    <Content Include="src\assets\css\styles.css" />
+    <Content Include="src\assets\favicon.ico" />
+    <Content Include="public\img\avataaars.svg" />
+    <Content Include="public\img\portfolio\cabin.png" />
+    <Content Include="public\img\portfolio\cake.png" />
+    <Content Include="public\img\portfolio\circus.png" />
+    <Content Include="public\img\portfolio\game.png" />
+    <Content Include="public\img\portfolio\safe.png" />
+    <Content Include="public\img\portfolio\submarine.png" />
+    <Content Include="src\assets\js\scripts.js" />
     <Content Include="src\assets\logo.png" />
-    <Content Include="src\components\HelloWorld.vue" />
+    <Content Include="src\components\Reservation\Create.vue" />
+    <Content Include="src\components\Reservation\Edit.vue" />
+    <Content Include="src\components\Reservation\List.vue" />
+    <Content Include="src\components\Table\Edit.vue" />
+    <Content Include="src\components\Table\List.vue" />
+    <Content Include="src\components\Login.vue" />
+    <Content Include="src\components\Navigation.vue" />
+    <Content Include="src\components\BaseTemplate.vue" />
+    <Content Include="src\components\Table\Create.vue" />
     <Content Include="src\main.js" />
+    <Content Include="src\router.js" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
