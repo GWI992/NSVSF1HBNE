@@ -6,12 +6,20 @@ axios.defaults.withCredentials = false;
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.baseURL = process.env.VUE_APP_API_HOST;
 
-import router from './router';
-import store from './store';
+axios.interceptors.response.use(function (response) {
+    if (response && 'status' in response && response.status == 200 && (typeof response.data) !== 'undefined') {
+        if ((typeof response?.data.value) !== 'undefined' && (typeof response.data.value?.errors) !== 'undefined') {
+            response.status = 400;
+            const errors = Object.entries(response.data.value.errors).map(([name, obj]) => ({ name, ...obj }))
+            errors.forEach((err) => {
+                showToast(err[0]);
+            });
+            return response;
+        }
+    }
 
-import Toast from 'vue-toastification'
-import { useToast } from "vue-toastification";
-import 'vue-toastification/dist/index.css'
+    return response;
+});
 
 axios.interceptors.response.use(undefined, function (error) {
     if (error) {
@@ -46,6 +54,14 @@ axios.interceptors.response.use(undefined, function (error) {
 
     return error.response;
 });
+
+
+import router from './router';
+import store from './store';
+
+import Toast from 'vue-toastification'
+import { useToast } from "vue-toastification";
+import 'vue-toastification/dist/index.css'
 
 const app = createApp(App);
 app.use(store);

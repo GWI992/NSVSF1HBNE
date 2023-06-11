@@ -31,8 +31,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.post("/api/reservation", reservation)
                 .then(response => {
-                    console.log(response);
-                    resolve(response.status == 200);
+                    resolve(response && response.status == 200);
                 })
                 .catch(err => {
                     console.warn(err);
@@ -44,7 +43,7 @@ const actions = {
         return new Promise((resolve, reject) => {
             axios.put("/api/reservation/" + reservation.id, reservation)
                 .then(response => {
-                    resolve(response.status == 200);
+                    resolve(response && response.status == 200);
                 })
                 .catch(err => {
                     console.warn(err);
