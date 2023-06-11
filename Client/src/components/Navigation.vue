@@ -11,6 +11,7 @@
                     <li class="nav-item mx-0 mx-lg-1"><router-link to="/" class="nav-link py-3 px-0 px-lg-3 rounded">Home</router-link></li>
                     <li class="nav-item mx-0 mx-lg-1"><router-link to="/login" class="nav-link py-3 px-0 px-lg-3 rounded">Login</router-link></li>
                     <li class="nav-item mx-0 mx-lg-1"><router-link to="/table" class="nav-link py-3 px-0 px-lg-3 rounded">Tables</router-link></li>
+                    <li class="nav-item mx-0 mx-lg-1"><router-link to="/reservation" class="nav-link py-3 px-0 px-lg-3 rounded">Reservations</router-link></li>
                 </ul>
             </div>
         </div>
