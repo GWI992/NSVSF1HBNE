@@ -84,6 +84,7 @@
     <Content Include="src\main.js" />
     <Content Include="src\router.js" />
     <Content Include="src\store\index.js" />
+    <Content Include="src\store\modules\reservation.js" />
     <Content Include="src\store\modules\table.js" />
     <Content Include="src\store\modules\auth.js">
       <SubType>Code</SubType>
