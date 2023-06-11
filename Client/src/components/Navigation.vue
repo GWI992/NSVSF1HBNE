@@ -12,7 +12,7 @@
                     <li v-if="!isAuthenticated" class="nav-item mx-0 mx-lg-1"><router-link to="/login" class="nav-link py-3 px-0 px-lg-3 rounded">Login</router-link></li>
                     <li v-if="isAuthenticated && isAdmin" class="nav-item mx-0 mx-lg-1"><router-link to="/table" class="nav-link py-3 px-0 px-lg-3 rounded">Tables</router-link></li>
                     <li v-if="isAuthenticated" class="nav-item mx-0 mx-lg-1"><router-link to="/reservation" class="nav-link py-3 px-0 px-lg-3 rounded">Reservations</router-link></li>
-                    <li v-if="isAuthenticated" class="nav-item mx-0 mx-lg-1"><button class="btn btn-sm btn-danger float-end rounded" type="button" v-on:click="LogoutTrigger">Logout</button></li>
+                    <li v-if="isAuthenticated" class="nav-item mx-0 mt-2 mx-lg-1"><button class="btn btn-sm btn-danger float-end rounded" type="button" v-on:click="LogoutTrigger">Logout</button></li>
                 </ul>
             </div>
         </div>
