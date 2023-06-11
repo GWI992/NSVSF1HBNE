@@ -9,7 +9,7 @@ namespace Endpoint.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TableController : GenericBaseController<Table, Table>
     {
         public TableController(ILogic<Table, Table> logic, IValidator<Table> validator) : base(logic, validator)

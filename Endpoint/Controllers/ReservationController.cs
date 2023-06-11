@@ -10,7 +10,7 @@ namespace Endpoint.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ReservationController : GenericBaseController<Reservation, Reservation>
     {
         public ReservationController(ILogic<Reservation, Reservation> logic, IValidator<Reservation> validator) : base(logic, validator)
