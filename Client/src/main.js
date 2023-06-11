@@ -43,6 +43,8 @@ axios.interceptors.response.use(undefined, function (error) {
             showToast('500 - Internal server error');
         }
     }
+
+    return error.response;
 });
 
 const app = createApp(App);
