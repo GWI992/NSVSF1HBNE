@@ -1,16 +1,24 @@
 <template>
     <section class="page-section" id="table-create">
         <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <h5>Create table</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <router-link to="/table"><i class="my-0 fa fa-arrow-up"></i> Back</router-link>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">
                     <form id="contactForm">
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="table-name" type="text" placeholder="Enter name..." v-model="table.name"/>
+                            <input class="form-control" id="table-name" type="text" placeholder="Enter name..." v-model="table.name" />
                             <label for="table-name">Name</label>
                         </div>
 
                         <div class="form-floating mb-3">
-                            <input class="form-control" id="table-capacity" type="number" placeholder="4" min="1" max="4" v-model="table.capacity"/>
+                            <input class="form-control" id="table-capacity" type="number" placeholder="4" min="1" max="4" v-model="table.capacity" />
                             <label for="table-capacity">Capacity</label>
                         </div>
 
