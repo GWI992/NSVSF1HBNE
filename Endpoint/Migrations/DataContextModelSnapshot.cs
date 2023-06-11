@@ -3,7 +3,6 @@ using System;
 using Endpoint.Repositories.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -18,61 +17,62 @@ namespace Endpoint.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("Endpoint.Models.Data.ApiUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
@@ -81,8 +81,7 @@ namespace Endpoint.Migrations
 
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
-                        .HasDatabaseName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+                        .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers", (string)null);
 
@@ -91,15 +90,15 @@ namespace Endpoint.Migrations
                         {
                             Id = "9b100ee4-69ab-42b9-ae2f-31e1b33c462d",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0884405-0fa3-41b3-9ab9-3130e2f228ba",
+                            ConcurrencyStamp = "d710c0a2-dc47-44a0-9248-74fb9f30ca6d",
                             Email = "admin@admin.hu",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ADMIN.HU",
                             NormalizedUserName = "ADMIN@ADMIN.HU",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDA6kyULvGA5XAzrvqv6KTAdhtZDgpYuN0Au1hF2T1ktauZQ8zxgyBh5Ns0AF/WbIw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGB4mGAfWOfVhaFKpNu3JhIYbI9WQ6YdPMSkoT8QcDITMUcnkEyHgrcKe6C+4tXuEQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "8b2757ea-a94a-4b78-ba64-f948e890438f",
+                            SecurityStamp = "65e4af5f-58f3-4907-b5e0-f5211b527050",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.hu"
                         });
@@ -108,25 +107,25 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Endpoint.Models.Data.Reservation", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("id");
 
                     b.Property<DateTime>("Begin")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("begin");
 
                     b.Property<DateTime>("Contact")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("contact");
 
                     b.Property<DateTime>("End")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("datetime(6)")
                         .HasColumnName("end");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("name");
 
                     b.Property<int>("Person")
@@ -135,7 +134,7 @@ namespace Endpoint.Migrations
 
                     b.Property<string>("TableId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("table_id");
 
                     b.HasKey("Id");
@@ -148,7 +147,7 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Endpoint.Models.Data.Table", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("id");
 
                     b.Property<int>("Capacity")
@@ -158,7 +157,7 @@ namespace Endpoint.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)")
+                        .HasColumnType("varchar(255)")
                         .HasColumnName("name");
 
                     b.HasKey("Id");
@@ -168,37 +167,37 @@ namespace Endpoint.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "885ee870-c8c6-47b4-b6f7-c89836b15640",
+                            Id = "69fc7569-cec7-4c73-a6d9-97e027c6621d",
                             Capacity = 2,
                             Name = "#1 Table"
                         },
                         new
                         {
-                            Id = "07eaf0ea-d516-47b4-a61a-8612f54a7e0b",
+                            Id = "9860834c-af5b-4ecb-abf0-4451eda7c6b6",
                             Capacity = 2,
                             Name = "#2 Table"
                         },
                         new
                         {
-                            Id = "8982a0a4-0b6a-49f9-b734-afd5e4c97e7c",
+                            Id = "85b20a73-f8e0-4995-88b4-45b1c7fa397d",
                             Capacity = 2,
                             Name = "#3 Table"
                         },
                         new
                         {
-                            Id = "077be945-e6cc-4f68-8011-0d213a10cebd",
+                            Id = "a7dbc52b-277c-45f7-9027-e3ba02111fc5",
                             Capacity = 4,
                             Name = "#4 Table"
                         },
                         new
                         {
-                            Id = "3fa9d4a3-31a2-414f-a7c6-bfaceb0d63a5",
+                            Id = "5545489f-5445-4e2e-9140-1fc8baf0faaa",
                             Capacity = 4,
                             Name = "#5 Table"
                         },
                         new
                         {
-                            Id = "4568cd2f-4edc-4049-ac54-593977fcd714",
+                            Id = "e79dd30f-0be4-4235-a031-38cfc6d41711",
                             Capacity = 4,
                             Name = "#6 Table"
                         });
@@ -207,26 +206,25 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                        .HasColumnType("varchar(256)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
                         .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+                        .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
 
@@ -234,14 +232,14 @@ namespace Endpoint.Migrations
                         new
                         {
                             Id = "2301D884-221A-4E7D-B509-0113DCC043E1",
-                            ConcurrencyStamp = "ec8fcb41-79e5-407b-90d6-bd7cdbaa8d84",
+                            ConcurrencyStamp = "d53e7da6-4e8b-487c-9428-d9fbbf1ff403",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
                             Id = "B22698B8-42A2-4115-9631-1C2D1E2AC5F7",
-                            ConcurrencyStamp = "09a0b0fe-e2d6-461f-91f8-f36550f44774",
+                            ConcurrencyStamp = "16a2d79d-c403-41ce-b735-cce0ab60cff1",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -253,17 +251,15 @@ namespace Endpoint.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -278,17 +274,15 @@ namespace Endpoint.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
@@ -300,17 +294,17 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -322,10 +316,10 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -344,16 +338,16 @@ namespace Endpoint.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 

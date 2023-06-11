@@ -23,8 +23,14 @@ builder.Services.AddControllers();
 
 // Set dbContext
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+//builder.Services.AddDbContext<DataContext>(options =>
+//    options.UseSqlServer(connectionString));
+
 builder.Services.AddDbContext<DataContext>(options =>
-    options.UseSqlServer(connectionString));
+{
+    options.UseLazyLoadingProxies();
+    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 // Identity
 builder.Services.AddAuthentication();
@@ -67,7 +73,7 @@ builder.Services.AddCors(options =>
             policy
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-                .WithOrigins("http://localhost:8081");
+                .AllowAnyOrigin();
         });
 });
 
