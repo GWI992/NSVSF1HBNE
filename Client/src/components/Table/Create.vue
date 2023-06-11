@@ -16,7 +16,7 @@
                             <label for="table-capacity">Capacity</label>
                         </div>
 
-                        <button class="btn btn-primary btn-xl" id="submitButton" type="button">Save</button>
+                        <button class="btn btn-primary btn-xl float-end" id="submitButton" type="button">Save</button>
                     </form>
                 </div>
             </div>
