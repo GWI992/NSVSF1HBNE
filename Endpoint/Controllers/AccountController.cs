@@ -65,7 +65,10 @@ namespace Endpoint.Controllers
                     return Unauthorized();
                 }
 
-                return Accepted(new { Token = await _authManager.CreateToken() });
+                return Accepted(new {
+                    User = await _userManager.FindByEmailAsync(loginDTO.Email),
+                    Token = await _authManager.CreateToken()
+                });
             }
             catch (Exception ex)
             {
