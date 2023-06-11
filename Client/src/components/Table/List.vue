@@ -1,9 +1,14 @@
 <template>
     <section class="page-section" id="table">
         <div class="container">
-            <div class="text-end">
-                <router-link to="/table/create" class="btn btn-success px-lg-3 rounded">Create</router-link>
-            </div>
+            <div class="row">
+                <div class="col-6">
+                    <h5>Tables</h5>
+                </div>
+                <div class="col-6 text-end">
+                    <router-link to="/table/create" class="btn btn-success px-lg-3 rounded text-end">Create</router-link>
+                </div>
+                </div>
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-10">
                     <table class="table table-striped table-borderless">
@@ -49,7 +54,6 @@
             ...mapActions(["TableList", "TableDelete"]),
             async load() {
                 this.tables = await this.TableList();
-                console.log(this.tables);
             },
             async del(table) {
                 if (confirm("Do you want delete " + table.name + "?") == true) {
