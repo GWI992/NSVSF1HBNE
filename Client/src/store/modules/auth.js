@@ -1,4 +1,5 @@
 import axios from "axios";
+import createPersistedState from 'vuex-persistedstate';
 var promiseFinally = require('promise.prototype.finally');
 promiseFinally.shim();
 

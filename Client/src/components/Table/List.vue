@@ -16,31 +16,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>#1 Table</td>
-                                <td>1</td>
+                            <tr v-for="(table, index) in tables" v-key="table.id">
+                                <th scope="row">{{ (index + 1) }}</th>
+                                <td>{{ table.name }}</td>
+                                <td>{{ table.capacity }}</td>
                                 <td class="text-end">
-                                    <router-link to="/table/1" class="btn btn-sm btn-secondary px-lg-3 rounded mx-1"><i class="fa fa-pencil"></i></router-link>
-                                    <button class="btn btn-sm btn-danger px-lg-3 rounded mx-1" type="button"><i class="fa fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>#2 Table</td>
-                                <td>2</td>
-                                <td class="text-end">
-                                    <router-link to="/table/2" class="btn btn-sm btn-secondary px-lg-3 rounded mx-1"><i class="fa fa-pencil"></i></router-link>
-                                    <button class="btn btn-sm btn-danger px-lg-3 rounded mx-1" type="button"><i class="fa fa-trash"></i></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>#3 Table</td>
-                                <td>4</td>
-                                <td class="text-end">
-                                    <router-link to="/table/3" class="btn btn-sm btn-secondary px-lg-3 rounded mx-1"><i class="fa fa-pencil"></i></router-link>
-                                    <button class="btn btn-sm btn-danger px-lg-3 rounded mx-1" type="button"><i class="fa fa-trash"></i></button>
+                                    <router-link v-bind:to="'/table/' + table.id" class="btn btn-sm btn-secondary px-lg-3 rounded mx-1"><i class="fa fa-pencil"></i></router-link>
+                                    <button class="btn btn-sm btn-danger px-lg-3 rounded mx-1" type="button" v-on:click="del(table)"><i class="fa fa-trash"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -52,8 +34,30 @@
 </template>
 
 <script>
+    import { mapActions } from "vuex"
     export default {
         name: 'Tables',
+        data() {
+            return {
+                tables: [],
+            }
+        },
+        mounted() {
+            this.load();
+        },
+        methods: {
+            ...mapActions(["TableList", "TableDelete"]),
+            async load() {
+                this.tables = await this.TableList();
+                console.log(this.tables);
+            },
+            async del(table) {
+                if (confirm("Do you want delete " + table.name + "?") == true) {
+                    await this.TableDelete(table);
+                    this.load();
+                }
+            }
+        },
     }
 </script>
 
