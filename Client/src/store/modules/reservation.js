@@ -52,7 +52,6 @@ const actions = {
         });
     },
     async ReservationDelete({ commit }, reservation) {
-        console.log(reservation);
         return new Promise((resolve, reject) => {
             axios.delete("/api/reservation/" + reservation.id)
                 .then(response => {
