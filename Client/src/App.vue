@@ -1,6 +1,6 @@
 <template>
-  <Navigation />
-  <BaseTemplate />
+    <Navigation />
+    <router-view />
 </template>
 
 <script>
