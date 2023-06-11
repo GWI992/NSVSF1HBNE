@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top p-1" id="mainNav">
         <div class="container">
             <router-link to="/" class="navbar-brand">Table Reservation</router-link>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,6 +10,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item mx-0 mx-lg-1"><router-link to="/" class="nav-link py-3 px-0 px-lg-3 rounded">Home</router-link></li>
                     <li class="nav-item mx-0 mx-lg-1"><router-link to="/login" class="nav-link py-3 px-0 px-lg-3 rounded">Login</router-link></li>
+                    <li class="nav-item mx-0 mx-lg-1"><router-link to="/table" class="nav-link py-3 px-0 px-lg-3 rounded">Tables</router-link></li>
                 </ul>
             </div>
         </div>
